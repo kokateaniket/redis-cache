@@ -32,9 +32,10 @@ public class SpringBootRedisExampleApplication {
 	@GetMapping(value="/")
 	public String pingRedis() {
 		String response = null;
+		Jedis jedis = null;
 		log.info("In pingRedis redisHost="+redisHost+", redisPort="+redisPort);
 		try {
-			Jedis jedis = new Jedis(redisHost, redisPort);
+			jedis = new Jedis(redisHost, redisPort);
 			log.info("Connection to server sucessfully: " + redisHost); 
 			//check whether server is running or not
 			response = jedis.ping();
@@ -42,6 +43,9 @@ public class SpringBootRedisExampleApplication {
 		} catch (Exception e) {
 			response = e.getMessage();
 			log.error("Error; "+e.getMessage(), e);
+		} finally {
+			if(jedis != null)
+				jedis.close();
 		}
 		return response;
 	}
@@ -49,9 +53,10 @@ public class SpringBootRedisExampleApplication {
 	@GetMapping(value="/putInCache/{key}/{value}")
 	public String putInCache(@PathVariable(name="key") String key, @PathVariable(name="value") String value) {
 		String response = null;
+		Jedis jedis = null;
 		log.info("In putInCache redisHost="+redisHost+", redisPort="+redisPort);
 		try {
-			Jedis jedis = new Jedis(redisHost, redisPort);
+			jedis = new Jedis(redisHost, redisPort);
 			log.info("Connection to server sucessfully"); 
 			//check whether server is running or not 
 			log.info("Server is running: "+jedis.ping()); 
@@ -59,6 +64,9 @@ public class SpringBootRedisExampleApplication {
 		} catch (Exception e) {
 			response = e.getMessage();
 			log.error("Error; "+e.getMessage(), e);
+		} finally {
+			if(jedis != null)
+				jedis.close();
 		}
 		return response;
 	}
@@ -66,9 +74,10 @@ public class SpringBootRedisExampleApplication {
 	@GetMapping(value="/getFromCache/{key}")
 	public String getFromCache(@PathVariable(name="key") String key) {
 		String response = null;
+		Jedis jedis = null;
 		log.info("In getFromCache redisHost="+redisHost+", redisPort="+redisPort);
 		try {
-			Jedis jedis = new Jedis(redisHost, redisPort);
+			jedis = new Jedis(redisHost, redisPort);
 			log.info("Connection to server sucessfully"); 
 			//check whether server is running or not 
 			log.info("Server is running: "+jedis.ping()); 
@@ -76,6 +85,9 @@ public class SpringBootRedisExampleApplication {
 		} catch (Exception e) {
 			response = e.getMessage();
 			log.error("Error; "+e.getMessage(), e);
+		} finally {
+			if(jedis != null)
+				jedis.close();
 		}
 		return response;
 	}
@@ -83,9 +95,10 @@ public class SpringBootRedisExampleApplication {
 	@GetMapping(value="/testCache")
 	public String testCache() {
 		String response = null;
+		Jedis jedis = null;
 		log.info("In testCache redisHost="+redisHost+", redisPort="+redisPort);
 		try {
-			Jedis jedis = new Jedis(redisHost, redisPort);
+			jedis = new Jedis(redisHost, redisPort);
 			log.info("Connection to server sucessfully"); 
 			//check whether server is running or not 
 			log.info("Server is running: "+jedis.ping()); 
@@ -105,6 +118,9 @@ public class SpringBootRedisExampleApplication {
 		} catch (Exception e) {
 			response = e.getMessage();
 			log.error("Error; "+e.getMessage(), e);
+		} finally {
+			if(jedis != null)
+				jedis.close();
 		}
 		return response;
 	}
