@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.rediscache.example.SpringBootRedisExampleApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.648 sec - in com.rediscache.example.SpringBootRedisExampleApplicationTests
